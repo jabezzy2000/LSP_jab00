@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class WordCounting {
 
@@ -48,7 +49,9 @@ public class WordCounting {
             }
         }
         
-        System.out.println(wordCount);
+        for (Entry<String, Integer> entry : wordCount.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+          }
         
 
 	}
