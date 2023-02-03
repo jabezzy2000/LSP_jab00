@@ -11,7 +11,7 @@ public class WordCounting {
 
 	public static void main(String[] args) {
 		//file path takes in the name of the text file to be read
-        String filePath = "text.txt";
+        String filePath = "\"main/java/resources/words.txt\"";
         Map<String, Integer> wordCount = new HashMap<String, Integer>();
         List<String> words = new ArrayList<String>();
 
