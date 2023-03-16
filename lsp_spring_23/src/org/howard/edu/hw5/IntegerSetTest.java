@@ -18,6 +18,13 @@ public class IntegerSetTest {
     }
     
     @Test
+    @DisplayName("Test case for testClear method with empty set")
+    public void testClearEmpty() {
+        IntegerSet set = new IntegerSet();
+        assertEquals(0, set.length());
+    }
+    
+    @Test
     @DisplayName("Test case for testGet method")
     public void testGet() {
         IntegerSet set = new IntegerSet();
@@ -26,14 +33,33 @@ public class IntegerSetTest {
         assertEquals(2, set.get(1));
     }
     
+    @Test(expected = IndexOutOfBoundsException.class)
+    @DisplayName("Test case for testGet method where element not in set")
+    public void testGet2() {
+        IntegerSet set = new IntegerSet();
+        set.add(1);
+        set.add(2);
+        set.get(10);
+    }
+    
     @Test
-    @DisplayName("Test case for testAdd method")
-    public void testAdd() {
+    @DisplayName("Test case for testAdd method when element already in set")
+    public void testAddDuplicate() {
         IntegerSet set = new IntegerSet();
         set.add(1);
         set.add(2);
         set.add(2);
         assertEquals(2, set.length());
+    }
+    
+    @Test
+    @DisplayName("Test case for testAdd method ")
+    public void testAdd() {
+        IntegerSet set = new IntegerSet();
+        set.add(1);
+        set.add(2);
+        set.add(3);
+        assertEquals(3, set.length());
     }
     
     @Test
@@ -47,6 +73,13 @@ public class IntegerSetTest {
     }
     
     @Test
+    @DisplayName("Test case for testLength method on an empty set")
+    public void testLengthEmpty() {
+        IntegerSet set = new IntegerSet();
+        assertEquals(0, set.length());
+    }
+    
+    @Test
     @DisplayName("Test case for testEqual method")
     public void testEqual() {
         IntegerSet set1 = new IntegerSet();
@@ -56,6 +89,18 @@ public class IntegerSetTest {
         set2.add(1);
         set2.add(2);
         assertTrue(set1.equal(set2));
+    }
+    
+    @Test
+    @DisplayName("Test case for testEqual method that differ by positive/negative signs")
+    public void testEqualNegative() {
+        IntegerSet set1 = new IntegerSet();
+        set1.add(-1);
+        set1.add(2);
+        IntegerSet set2 = new IntegerSet();
+        set2.add(1);
+        set2.add(2);
+        assertFalse(set1.equal(set2));
     }
     
     @Test
@@ -113,6 +158,16 @@ public class IntegerSetTest {
     }
     
     @Test
+    @DisplayName("Test case for testRemove method where element not in set")
+    public void testRemoveNonExisting() {
+        IntegerSet set = new IntegerSet();
+        set.add(1);
+        set.add(2);
+        set.remove(3);
+        assertEquals(2, set.length());
+    }
+    
+    @Test
     @DisplayName("Test case for testUnion method")
     public void testUnion() {
         IntegerSet set1 = new IntegerSet();
@@ -146,6 +201,15 @@ public class IntegerSetTest {
         set.add(2);
         set.add(3);
         String expected = "[1,2,3]";
+        String actual = set.toString();
+        assertEquals(expected, actual);
+    }
+    
+    @Test
+    @DisplayName("Test case for test to String method for empty set")
+    public void testToStringEmpty() {
+    	IntegerSet set = new IntegerSet();
+        String expected = "[]";
         String actual = set.toString();
         assertEquals(expected, actual);
     }
