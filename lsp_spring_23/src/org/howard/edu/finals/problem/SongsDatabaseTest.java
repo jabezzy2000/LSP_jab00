@@ -14,8 +14,8 @@ class SongsDatabaseTest {
     void setUp() {
         // Initialize the SongsDatabase object and add sample data
         db = new SongsDatabase();
-        db.addSong("Rap", "Savage");
-        db.addSong("Rap", "Gin and Juice");
+        db.addSong("Rap", "All the above");
+        db.addSong("Rap", "Hey Man");
         db.addSong("Jazz", "Always There");
     }
 
@@ -32,16 +32,16 @@ class SongsDatabaseTest {
         assertTrue(rapSongs.contains("HUMBLE"));
 
         // Test adding a song with the same title to the same genre
-        db.addSong("Rap", "Savage");
+        db.addSong("Rap", "All the above");
         rapSongs = db.getSongs("Rap");
-        assertEquals(3, rapSongs.size());
+        assertEquals(3, rapSongs.size()); // This should pass now since duplicate songs are not counted
     }
 
     @Test
     void testGetSongs() {
         // Test retrieving songs of a specific genre
         Set<String> rapSongs = db.getSongs("Rap");
-        assertTrue(rapSongs.contains("Savage") && rapSongs.contains("Gin and Juice"));
+        assertTrue(rapSongs.contains("All the above") && rapSongs.contains("Hey Man"));
 
         // Test retrieving songs of a genre with no songs
         db.addSong("EmptyGenre", "EmptySong");
@@ -54,12 +54,12 @@ class SongsDatabaseTest {
     @Test
     void testGetGenreOfSong() {
         // Test retrieving the genre of a specific song
-        assertEquals("Rap", db.getGenreOfSong("Savage"));
+        assertEquals("Rap", db.getGenreOfSong("All the above"));
         assertEquals("Jazz", db.getGenreOfSong("Always There"));
 
         // Test retrieving the genre of a song with multiple genres
-        db.addSong("Alternative", "Savage");
-        String genre = db.getGenreOfSong("Savage");
+        db.addSong("Alternative", "All the above");
+        String genre = db.getGenreOfSong("All the above");
         assertTrue(genre.equals("Rap") || genre.equals("Alternative"));
     }
 
